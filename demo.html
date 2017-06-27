@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+    <script>
+        axios.get('/1.mp4')
+
+                .then(function(response){
+
+            console.log('get请求已经成功');
+            alert('get请求已经成功');
+
+        });
+
+
+        //同时执行多个请求
+        axios.all([
+
+            axios.get('https://api.github.com/'),
+
+            axios.get('https://api.github.com/')
+
+        ])
+
+        .then(axios.spread(function (userResp, reposResp) {
+
+            // 上面两个请求都完成后，才执行这个回调方法
+
+            console.log('User success');
+            alert('同时执行多个请求已经成功');
+            console.log('Repositories success');
+
+        }));
+        //当所有的请求都完成后，会收到一个数组，包含着响应对象，其中的顺序和请求发送的顺序相同，可以使用 axios.spread 分割成多个单独的响应对象
+
+    </script>
+</body>
+</html>
